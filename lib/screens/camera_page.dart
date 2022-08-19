@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:camera/camera.dart';
@@ -17,6 +16,7 @@ class _CameraPageState extends State<CameraPage> {
   late bool _isRecording = false;
   late CameraController _cameraController;
 
+//initializing camera to start reccording
   _initCamera() async {
     final cameras = await availableCameras();
     final front = cameras.firstWhere(
@@ -28,11 +28,10 @@ class _CameraPageState extends State<CameraPage> {
 
   _recordVideo() async {
     if (_isRecording) {
+      //file from recorded video
       final file = await _cameraController.stopVideoRecording();
-
-      Uint8List codeUnits =await file.readAsBytes();
-      print("this is from ccamera page");
-      print(codeUnits);
+//conveting file to bytes to upload in firebase
+      Uint8List codeUnits = await file.readAsBytes();
       setState(() => _isRecording = false);
       final route = MaterialPageRoute(
         fullscreenDialog: true,

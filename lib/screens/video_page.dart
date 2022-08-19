@@ -11,7 +11,8 @@ import 'package:webcam/controllers/upload_video_controller.dart';
 class VideoPage extends StatefulWidget {
   final String filePath;
   final Uint8List codeUnits;
-  const VideoPage({Key? key, required this.filePath,required this.codeUnits}) : super(key: key);
+  const VideoPage({Key? key, required this.filePath, required this.codeUnits})
+      : super(key: key);
 
   @override
   State<VideoPage> createState() => _VideoPageState();
@@ -72,7 +73,8 @@ class _VideoPageState extends State<VideoPage> {
           IconButton(
             icon: const Icon(Icons.check),
             onPressed: () {
-              uploadVideoController.uploadVideo(widget.filePath,widget.codeUnits);
+              uploadVideoController.uploadVideo(
+                  widget.filePath, widget.codeUnits);
               //uploadVideoController.uploadFile(widget.filePath);
             },
           )
