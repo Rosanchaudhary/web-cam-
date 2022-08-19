@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:webcam/screens/camera_page.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+  WidgetsFlutterBinding.ensureInitialized(); 
   await Firebase.initializeApp(
     //requirements from firebase
       options: const FirebaseOptions(

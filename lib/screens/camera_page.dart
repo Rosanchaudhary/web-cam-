@@ -23,7 +23,7 @@ class _CameraPageState extends State<CameraPage> {
         (camera) => camera.lensDirection == CameraLensDirection.front);
     _cameraController = CameraController(front, ResolutionPreset.max);
     await _cameraController.initialize();
-    setState(() => _isLoading = false);
+    setState(() => _isLoading = false); 
   }
 
   _recordVideo() async {

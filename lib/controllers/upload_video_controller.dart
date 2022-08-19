@@ -15,9 +15,8 @@ class UploadVideoController extends GetxController {
 
     TaskSnapshot snap = await uploadTask;
     String downloadUrl = await snap.ref.getDownloadURL();
-    print(downloadUrl);
     return downloadUrl;
-  }
+  } 
 
   // _getThumbnail(String videoPath) async {
   //   final thumbNail = await VideoCompress.getFileThumbnail(videoPath);
