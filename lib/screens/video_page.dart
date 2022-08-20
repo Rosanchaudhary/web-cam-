@@ -1,9 +1,7 @@
-import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:video_player/video_player.dart';
 import 'package:flutter/foundation.dart';
 import 'package:universal_html/html.dart' as html;
 import 'package:webcam/controllers/upload_video_controller.dart';
@@ -19,8 +17,6 @@ class VideoPage extends StatefulWidget {
 }
 
 class _VideoPageState extends State<VideoPage> {
-  late VideoPlayerController _videoPlayerController;
-
   UploadVideoController uploadVideoController =
       Get.put(UploadVideoController());
 
@@ -46,20 +42,6 @@ class _VideoPageState extends State<VideoPage> {
   void initState() {
     super.initState();
     playVideo(widget.filePath);
-    // _initVideoPlayer();
-  }
-
-  @override
-  void dispose() {
-    _videoPlayerController.dispose();
-    super.dispose();
-  }
-
-  Future _initVideoPlayer() async {
-    _videoPlayerController = VideoPlayerController.file(File(widget.filePath));
-    await _videoPlayerController.initialize();
-    await _videoPlayerController.setLooping(true);
-    await _videoPlayerController.play();
   }
 
   @override
@@ -75,22 +57,12 @@ class _VideoPageState extends State<VideoPage> {
             onPressed: () {
               uploadVideoController.uploadVideo(
                   widget.filePath, widget.codeUnits);
-              //uploadVideoController.uploadFile(widget.filePath);
             },
           )
         ],
       ),
       extendBodyBehindAppBar: true,
-      body: FutureBuilder(
-        future: _initVideoPlayer(),
-        builder: (context, state) {
-          if (state.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
-          } else {
-            return VideoPlayer(_videoPlayerController);
-          }
-        },
-      ),
+      body: Container(),
     );
   }
 }

@@ -3,6 +3,7 @@ import 'dart:typed_data';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:webcam/screens/video_page.dart';
+//import 'package:camera_web/camera_web.dart';
 
 class CameraPage extends StatefulWidget {
   const CameraPage({Key? key}) : super(key: key);
@@ -16,20 +17,27 @@ class _CameraPageState extends State<CameraPage> {
   late bool _isRecording = false;
   late CameraController _cameraController;
 
+
 //initializing camera to start reccording
   _initCamera() async {
-    final cameras = await availableCameras();
-    final front = cameras.firstWhere(
-        (camera) => camera.lensDirection == CameraLensDirection.front);
-    _cameraController = CameraController(front, ResolutionPreset.max);
-    await _cameraController.initialize();
-    setState(() => _isLoading = false); 
+    try {
+      final cameras = await availableCameras();
+      final front = cameras.firstWhere(
+          (camera) => camera.lensDirection == CameraLensDirection.front);
+      _cameraController = CameraController(front, ResolutionPreset.max);
+      await _cameraController.initialize();
+      setState(() => _isLoading = false);
+    } catch (e) {
+      print("Hello this is error");
+      print(e.toString());
+    }
   }
 
   _recordVideo() async {
     if (_isRecording) {
       //file from recorded video
       final file = await _cameraController.stopVideoRecording();
+
 //conveting file to bytes to upload in firebase
       Uint8List codeUnits = await file.readAsBytes();
       setState(() => _isRecording = false);
@@ -52,6 +60,7 @@ class _CameraPageState extends State<CameraPage> {
     _initCamera();
   }
 
+
   @override
   void dispose() {
     _cameraController.dispose();
@@ -72,7 +81,10 @@ class _CameraPageState extends State<CameraPage> {
         child: Stack(
           alignment: Alignment.bottomCenter,
           children: [
-            CameraPreview(_cameraController),
+            SizedBox(
+                height: 500,
+                width: 500,
+                child: CameraPreview(_cameraController)),
             Padding(
               padding: const EdgeInsets.all(25),
               child: FloatingActionButton(
