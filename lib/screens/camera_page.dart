@@ -3,7 +3,6 @@ import 'dart:typed_data';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:webcam/screens/video_page.dart';
-//import 'package:camera_web/camera_web.dart';
 
 class CameraPage extends StatefulWidget {
   const CameraPage({Key? key}) : super(key: key);
@@ -17,15 +16,8 @@ class _CameraPageState extends State<CameraPage> {
   late bool _isRecording = false;
   late CameraController _cameraController;
 
-//initializing camera to start reccording
-//initializing camera to start reccording
   _initCamera() async {
     final cameras = await availableCameras();
-// final front = cameras.firstWhere(
-// (camera) => camera.lensDirection == CameraLensDirection.front);
-// _cameraController = CameraController(front, ResolutionPreset.max);
-// await _cameraController.initialize();
-// setState(() => _isLoading = false);
     _cameraController = CameraController(cameras[0], ResolutionPreset.max);
     _cameraController.initialize().then((_) {
       if (!mounted) {
