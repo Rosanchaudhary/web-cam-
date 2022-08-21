@@ -48,6 +48,7 @@ dependencies:
   firebase_storage_web: ^3.3.3
   mime_type: ^1.0.0
   firebase: ^9.0.3
+  webview_flutter: ^3.0.4
 
 dev_dependencies:
   flutter_test:

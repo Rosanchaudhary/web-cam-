@@ -1,8 +1,9 @@
 import 'dart:typed_data';
 
 import 'package:camera/camera.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:webcam/screens/video_page.dart';
+import 'package:webcam/screens/video_player.dart';
 
 class CameraPage extends StatefulWidget {
   const CameraPage({Key? key}) : super(key: key);
@@ -28,10 +29,14 @@ class _CameraPageState extends State<CameraPage> {
       if (e is CameraException) {
         switch (e.code) {
           case 'CameraAccessDenied':
-            print('User denied camera access.');
+            if (kDebugMode) {
+              print('User denied camera access.');
+            }
             break;
           default:
-            print('Handle other errors.');
+            if (kDebugMode) {
+              print('Handle other errors.');
+            }
             break;
         }
       }
@@ -48,7 +53,11 @@ class _CameraPageState extends State<CameraPage> {
       setState(() => _isRecording = false);
       final route = MaterialPageRoute(
         fullscreenDialog: true,
-        builder: (_) => VideoPage(filePath: file.path, codeUnits: codeUnits),
+        builder: (_) => VideoApp(
+          path: file.path,
+          codeUnits:codeUnits
+      
+        ),
       );
       // ignore: use_build_context_synchronously
       Navigator.push(context, route);

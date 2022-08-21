@@ -20,7 +20,7 @@ class _VideoPageState extends State<VideoPage> {
   UploadVideoController uploadVideoController =
       Get.put(UploadVideoController());
 
-  void playVideo(String atUrl) {
+  playVideo(String atUrl) {
     if (kIsWeb) {
       final v = html.window.document.getElementById('videoPlayer');
       if (v != null) {
@@ -41,7 +41,6 @@ class _VideoPageState extends State<VideoPage> {
   @override
   void initState() {
     super.initState();
-    playVideo(widget.filePath);
   }
 
   @override
@@ -49,7 +48,7 @@ class _VideoPageState extends State<VideoPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Preview'),
-        elevation: 0,
+        elevation: 0, 
         backgroundColor: Colors.black26,
         actions: [
           IconButton(
@@ -62,7 +61,13 @@ class _VideoPageState extends State<VideoPage> {
         ],
       ),
       extendBodyBehindAppBar: true,
-      body: Container(),
+      body: Container(
+      ),
     );
   }
 }
+
+ 
+   
+   
+  
